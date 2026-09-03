@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ويب كود ستوديو</string>
+    <string name="files">الملفات</string>
+    <string name="templates">القوالب</string>
+    <string name="settings">الإعدادات</string>
+    <string name="console">وحدة التحكم</string>
+    <string name="new_file">ملف جديد</string>
+    <string name="new_folder">مجلد جديد</string>
+    <string name="create">إنشاء</string>
+    <string name="cancel">إلغاء</string>
+    <string name="rename">إعادة تسمية</string>
+    <string name="delete">حذف</string>
+    <string name="exit_project">الخروج من المشروع</string>
+    <string name="exit_confirm">هل أنت متأكد أنك تريد الخروج؟ يتم حفظ تغييراتك تلقائيًا.</string>
+    <string name="exit">خروج</string>
+    <string name="file_name_hint">اسم الملف (مثال: index.html)</string>
+    <string name="folder_name_hint">اسم المجلد</string>
+    <string name="new_filename_hint">اسم الملف الجديد</string>
+    <string name="cannot_edit_images">لا يمكن تعديل الصور مباشرة</string>
+    <string name="copied_logs">تم نسخ جميع السجلات</string>
+    <string name="no_logs">لا توجد سجلات بعد.</string>
+    <string name="about">حول</string>
+    <string name="language">اللغة</string>
+    <string name="english">English</string>
+    <string name="arabic">العربية</string>
+    <string name="spanish">Español</string>
+    <string name="app_info">معلومات التطبيق</string>
+    <string name="about_text">ويب كود ستوديو هو محرر أكواد للهواتف يدعم HTML و CSS و JavaScript و Three.js والعديد من اللغات الأخرى. تم تطويره باستخدام AI Studio.</string>
+</resources>

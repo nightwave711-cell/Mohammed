@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WebCode Studio</string>
+    <string name="files">Archivos</string>
+    <string name="templates">Plantillas</string>
+    <string name="settings">Configuración</string>
+    <string name="console">Consola</string>
+    <string name="new_file">Nuevo Archivo</string>
+    <string name="new_folder">Nueva Carpeta</string>
+    <string name="create">Crear</string>
+    <string name="cancel">Cancelar</string>
+    <string name="rename">Renombrar</string>
+    <string name="delete">Eliminar</string>
+    <string name="exit_project">Salir del Proyecto</string>
+    <string name="exit_confirm">¿Estás seguro de que quieres salir? Tus cambios se guardan automáticamente.</string>
+    <string name="exit">Salir</string>
+    <string name="file_name_hint">Nombre del archivo (ej. index.html)</string>
+    <string name="folder_name_hint">Nombre de la carpeta</string>
+    <string name="new_filename_hint">Nuevo nombre</string>
+    <string name="cannot_edit_images">No se pueden editar imágenes directamente</string>
+    <string name="copied_logs">Todos los registros copiados</string>
+    <string name="no_logs">Aún no hay registros.</string>
+    <string name="about">Acerca de</string>
+    <string name="language">Idioma</string>
+    <string name="english">English</string>
+    <string name="arabic">العربية</string>
+    <string name="spanish">Español</string>
+    <string name="app_info">Información de la App</string>
+    <string name="about_text">WebCode Studio es un editor de código móvil compatible con HTML, CSS, JavaScript, Three.js y muchos más lenguajes. Desarrollado con AI Studio.</string>
+</resources>
