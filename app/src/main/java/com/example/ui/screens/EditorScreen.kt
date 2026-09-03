@@ -20,6 +20,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.AutoFixHigh
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -74,6 +77,7 @@ fun EditorScreen(
     var showNewFolderDialog by remember { mutableStateOf(false) }
     var targetParentDir by remember { mutableStateOf<java.io.File?>(null) }
     var insertTextTrigger by remember { mutableStateOf<Pair<String, Long>?>(null) }
+    var formatTrigger by remember { mutableStateOf<Long?>(null) }
     var showRenameImageDialog by remember { mutableStateOf<Uri?>(null) }
     var renameImageName by remember { mutableStateOf("image.png") }
 
@@ -329,6 +333,7 @@ fun EditorScreen(
                             language = language,
                             fontSize = uiState.fontSize,
                             insertTextTrigger = insertTextTrigger,
+                            formatTrigger = formatTrigger,
                             modifier = Modifier.weight(1f)
                         )
                         
@@ -340,6 +345,16 @@ fun EditorScreen(
                                 .horizontalScroll(rememberScrollState()),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
+                            TextButton(
+                                onClick = { formatTrigger = System.currentTimeMillis() },
+                                modifier = Modifier.padding(horizontal = 2.dp),
+                                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 0.dp)
+                            ) {
+                                Icon(androidx.compose.material.icons.Icons.Default.AutoFixHigh, contentDescription = "Format", tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(18.dp))
+                                Spacer(Modifier.width(4.dp))
+                                Text("Format", style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary)
+                            }
+                            
                             val helpers = listOf("{", "}", "(", ")", "[", "]", "<", ">", "=", "+", "-", "*", "/", "\\", "\"", "'", ";", ":", ",", ".", "!", "?", "&", "|")
                             helpers.forEach { symbol ->
                                 TextButton(

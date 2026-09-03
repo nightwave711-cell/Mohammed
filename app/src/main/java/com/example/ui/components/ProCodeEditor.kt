@@ -21,7 +21,8 @@ fun ProCodeEditor(
     language: String,
     fontSize: Float,
     modifier: Modifier = Modifier,
-    insertTextTrigger: Pair<String, Long>? = null
+    insertTextTrigger: Pair<String, Long>? = null,
+    formatTrigger: Long? = null
 ) {
     var webView by remember { mutableStateOf<WebView?>(null) }
     var isReady by remember { mutableStateOf(false) }
@@ -72,6 +73,14 @@ fun ProCodeEditor(
         }
     }
 
+
+    // When format triggered
+    LaunchedEffect(formatTrigger) {
+        if (isReady && webView != null && formatTrigger != null) {
+            webView?.evaluateJavascript("if (window.editor) { var beautify = ace.require('ace/ext/beautify'); beautify.beautify(window.editor.session); }", null)
+        }
+    }
+
     // When font size changes
     LaunchedEffect(fontSize, isReady) {
         if (isReady && webView != null) {
@@ -118,14 +127,19 @@ fun ProCodeEditor(
                       <!-- Using Ace Editor -->
                       <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ace.js" type="text/javascript" charset="utf-8"></script>
                       <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ext-language_tools.min.js"></script>
+                      <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ext-emmet.min.js"></script>
+                      <script src="https://cloud9ide.github.io/emmet-core/emmet.js"></script>
+                      <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ext-searchbox.min.js"></script>
+                      <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ext-beautify.min.js"></script>
                       <script>
                         var editor = ace.edit("editor");
-                        editor.setTheme("ace/theme/tomorrow_night_eighties");
+                        editor.setTheme("ace/theme/monokai");
                         editor.session.setMode("$mode");
                         editor.setOptions({
                             enableBasicAutocompletion: true,
                             enableLiveAutocompletion: true,
                             enableSnippets: true,
+                            enableEmmet: true,
                             showLineNumbers: true,
                             tabSize: 4,
                             useSoftTabs: true,
