@@ -21,6 +21,10 @@ class FileManager(private val context: Context) {
         return dir.listFiles()?.toList() ?: emptyList()
     }
 
+    fun writeFileByObj(file: File, content: String) {
+        file.writeText(content)
+    }
+
     fun readFile(file: File): String {
         return if (file.exists()) file.readText() else ""
     }

@@ -33,7 +33,9 @@ fun CodeEditor(
     onCodeChange: (String) -> Unit,
     language: String,
     fontSize: Float,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    insertTextTrigger: Pair<String, Long>? = null,
+    formatTrigger: Long? = null
 ) {
     var internalText by remember { mutableStateOf(TextFieldValue(code, TextRange(code.length))) }
     

@@ -44,7 +44,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.data.ProjectRepository
 import com.example.data.ZipUtil
 import com.example.ui.components.CodeEditor
-import com.example.ui.components.ProCodeEditor
+import com.example.ui.components.CodeEditor
 import com.example.ui.components.PreviewWebView
 import kotlinx.coroutines.launch
 import java.io.File
@@ -181,6 +181,7 @@ fun EditorScreen(
                 }
                 
                 Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
+                    androidx.compose.runtime.key(uiState.fileTreeTrigger) {
                     uiState.files.sortedWith(compareBy({ !it.isDirectory }, { it.name })).forEach { file ->
                         com.example.ui.components.FileTreeView(
                             file = file,
@@ -213,6 +214,7 @@ fun EditorScreen(
                                 showNewFolderDialog = true
                             }
                         )
+                    }
                     }
                 }
             }
@@ -327,7 +329,7 @@ fun EditorScreen(
                     }
                     
                     Column(modifier = Modifier.weight(1f)) {
-                        ProCodeEditor(
+                        CodeEditor(
                             code = uiState.fileContent,
                             onCodeChange = viewModel::updateFileContent,
                             language = language,

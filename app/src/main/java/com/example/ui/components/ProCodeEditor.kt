@@ -3,6 +3,8 @@ package com.example.ui.components
 import android.annotation.SuppressLint
 import android.webkit.JavascriptInterface
 import android.webkit.WebChromeClient
+import android.webkit.ConsoleMessage
+import android.util.Log
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.compose.foundation.layout.fillMaxSize
@@ -95,7 +97,12 @@ fun ProCodeEditor(
                 settings.javaScriptEnabled = true
                 settings.domStorageEnabled = true
                 
-                webChromeClient = WebChromeClient()
+                webChromeClient = object : WebChromeClient() {
+                    override fun onConsoleMessage(consoleMessage: ConsoleMessage?): Boolean {
+                        Log.e("WebViewConsole", "${consoleMessage?.message()} -- From line ${consoleMessage?.lineNumber()} of ${consoleMessage?.sourceId()}")
+                        return super.onConsoleMessage(consoleMessage)
+                    }
+                }
                 webViewClient = object : WebViewClient() {
                     override fun onPageFinished(view: WebView?, url: String?) {
                         super.onPageFinished(view, url)
@@ -127,8 +134,6 @@ fun ProCodeEditor(
                       <!-- Using Ace Editor -->
                       <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ace.js" type="text/javascript" charset="utf-8"></script>
                       <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ext-language_tools.min.js"></script>
-                      <script src="https://cloud9ide.github.io/emmet-core/emmet.js"></script>
-                      <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ext-emmet.min.js"></script>
                       <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ext-searchbox.min.js"></script>
                       <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ext-beautify.min.js"></script>
                       <script>
@@ -139,7 +144,6 @@ fun ProCodeEditor(
                             enableBasicAutocompletion: true,
                             enableLiveAutocompletion: true,
                             enableSnippets: true,
-                            enableEmmet: true,
                             showLineNumbers: true,
                             tabSize: 4,
                             useSoftTabs: true,

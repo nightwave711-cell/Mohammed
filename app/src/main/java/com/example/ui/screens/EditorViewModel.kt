@@ -28,7 +28,8 @@ data class EditorUiState(
     val fontSize: Float = 14f,
     val previewWidth: Int? = null,
     val previewHeight: Int? = null,
-    val previewZoom: Float = 1f
+    val previewZoom: Float = 1f,
+    val fileTreeTrigger: Int = 0
 )
 
 class EditorViewModel(
@@ -96,7 +97,7 @@ class EditorViewModel(
     fun saveCurrentFileNow() {
         val state = _uiState.value
         val file = state.currentFile ?: return
-        fileManager.writeFile(projectId, file.name, state.fileContent)
+        fileManager.writeFileByObj(file, state.fileContent)
         
         // Update project timestamp
         viewModelScope.launch {
@@ -112,7 +113,7 @@ class EditorViewModel(
         val files = fileManager.listFiles(projectId)
         val newFile = File(targetDir, fileName)
         if (newFile.exists()) {
-            _uiState.update { it.copy(files = files) }
+            _uiState.update { it.copy(files = files, fileTreeTrigger = it.fileTreeTrigger + 1) }
             openFile(newFile)
         }
     }
@@ -121,7 +122,7 @@ class EditorViewModel(
         val targetDir = parentDir ?: fileManager.getProjectDir(projectId)
         fileManager.createFolder(targetDir, folderName)
         val files = fileManager.listFiles(projectId)
-        _uiState.update { it.copy(files = files) }
+        _uiState.update { it.copy(files = files, fileTreeTrigger = it.fileTreeTrigger + 1) }
     }
 
     fun renameFile(oldFile: File, newName: String) {
@@ -130,6 +131,7 @@ class EditorViewModel(
         val newFile = File(oldFile.parentFile, newName)
         _uiState.update { 
             it.copy(
+                fileTreeTrigger = it.fileTreeTrigger + 1,
                 files = files,
                 currentFile = if (it.currentFile?.absolutePath == oldFile.absolutePath) newFile else it.currentFile
             )
@@ -150,14 +152,14 @@ class EditorViewModel(
         fileManager.importFileFromUri(projectId, uri, fileName)
         val projectRoot = fileManager.getProjectDir(projectId)
                 val files = fileManager.listFiles(projectId)
-        _uiState.update { it.copy(files = files) }
+        _uiState.update { it.copy(files = files, fileTreeTrigger = it.fileTreeTrigger + 1) }
     }
 
     fun importImage(uri: android.net.Uri, fileName: String) {
         fileManager.importFileFromUri(projectId, uri, fileName)
         val projectRoot = fileManager.getProjectDir(projectId)
                 val files = fileManager.listFiles(projectId)
-        _uiState.update { it.copy(files = files) }
+        _uiState.update { it.copy(files = files, fileTreeTrigger = it.fileTreeTrigger + 1) }
     }
 
     fun deleteFile(file: File) {
@@ -177,7 +179,7 @@ class EditorViewModel(
                 ) 
             }
         } else {
-            _uiState.update { it.copy(files = files) }
+            _uiState.update { it.copy(files = files, fileTreeTrigger = it.fileTreeTrigger + 1) }
         }
     }
 
