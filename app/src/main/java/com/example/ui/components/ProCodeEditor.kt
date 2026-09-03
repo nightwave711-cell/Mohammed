@@ -127,8 +127,8 @@ fun ProCodeEditor(
                       <!-- Using Ace Editor -->
                       <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ace.js" type="text/javascript" charset="utf-8"></script>
                       <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ext-language_tools.min.js"></script>
-                      <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ext-emmet.min.js"></script>
                       <script src="https://cloud9ide.github.io/emmet-core/emmet.js"></script>
+                      <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ext-emmet.min.js"></script>
                       <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ext-searchbox.min.js"></script>
                       <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ext-beautify.min.js"></script>
                       <script>
